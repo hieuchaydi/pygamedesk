@@ -1,11 +1,7 @@
 import time
 import pygame
 import random
-
-# Initialize Pygame
 pygame.init()
-
-# Define colors
 yellow = (255, 255, 0)
 red = (255, 0, 0)
 black = (0, 0, 0)
@@ -13,24 +9,19 @@ white = (255, 255, 255)
 gray = (169, 169, 169)
 flash_colors = [red, white]
 
-# Display dimensions
 dis_width = 800
 dis_height = 600
 
-# Create display
 dis = pygame.display.set_mode((dis_width, dis_height))
 pygame.display.set_caption('Snake Game')
 
-# Set clock and game parameters
 clock = pygame.time.Clock()
 snake_block = 10
 snake_speed = 15
 
-# Define fonts
 font_style = pygame.font.SysFont('arial', 50)
 score_font = pygame.font.SysFont('arial', 35)
 
-# Load background image
 image_path = 'C:/Users/FPT/OneDrive/Desktop/pygame/media/tree.png'
 try:
     background_image = pygame.image.load(image_path)
@@ -40,33 +31,27 @@ except FileNotFoundError:
     pygame.quit()
     quit()
 
-# Function to draw the snake
 def our_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(dis, yellow, [x[0], x[1], snake_block, snake_block])
 
-# Function to display a message on the screen
 def message(msg, color, pos):
     mesg = font_style.render(msg, True, color)
     dis.blit(mesg, pos)
 
-# Function to show the score
 def show_score(score):
     value = score_font.render("Your Score: " + str(score), True, white)
     dis.blit(value, [0, 0])
 
-# Function to draw a button
 def draw_button(text, color, rect):
     pygame.draw.rect(dis, color, rect)
     text_surf = font_style.render(text, True, black)
     text_rect = text_surf.get_rect(center=(rect[0] + rect[2] / 2, rect[1] + rect[3] / 2))
     dis.blit(text_surf, text_rect)
 
-# Function to check if a button is clicked
 def is_button_clicked(rect, pos):
     return pygame.Rect(rect).collidepoint(pos)
 
-# Main game loop
 def gameLoop():
     game_over = False
     game_close = False
@@ -99,7 +84,7 @@ def gameLoop():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     pos = pygame.mouse.get_pos()
                     if is_button_clicked([dis_width / 2 - 100, dis_height / 2 - 50, 200, 50], pos):
-                        gameLoop()  # Restart the game
+                        gameLoop() 
                     elif is_button_clicked([dis_width / 2 - 100, dis_height / 2 + 20, 200, 50], pos):
                         pygame.quit()
                         quit()
@@ -170,7 +155,6 @@ def gameLoop():
     pygame.quit()
     quit()
 
-# Main menu loop
 def main_menu():
     menu = True
     while menu:
